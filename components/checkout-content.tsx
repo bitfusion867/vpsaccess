@@ -229,7 +229,7 @@ export function CheckoutContent() {
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
-                  This is a demo. No actual payment will be processed.
+                  Please wait while your payment is being processed.
                 </p>
               </CardContent>
             </Card>
