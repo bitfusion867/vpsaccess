@@ -27,7 +27,7 @@ export function HeroSection() {
             className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 text-lg rounded-2xl"
             onClick={scrollToPricing}
           >
-            Start Trading Now
+            Start VPS
           </Button>
         </div>
       </div>

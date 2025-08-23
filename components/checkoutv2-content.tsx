@@ -1,15 +1,16 @@
 "use client"
 
-import {useRouter, useSearchParams} from "next/navigation"
+import {useSearchParams} from "next/navigation"
 import {useState} from "react"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import {Button} from "@/components/ui/button"
 import {Badge} from "@/components/ui/badge"
-import {Check, ArrowLeft, Copy, CheckCircle} from "lucide-react"
+import {ArrowLeft, Copy, CheckCircle} from "lucide-react"
 import Link from "next/link"
-import {planData} from "@/lib/data"
-import {createVPSCheckout} from "@/lib/actions/vps_checkout.actions";
+import {locationLockerPlanData} from "@/lib/data"
 import {useAuth} from "@/contexts/auth-context";
+import {useRouter} from "next/navigation"
+import {createLocationLockerCheckout} from "@/lib/actions/location_locker_checkout.actions";
 import swal from 'sweetalert';
 
 const cryptoOptions = [
@@ -20,23 +21,23 @@ const cryptoOptions = [
 
 const cryptoWallets = {
     BTC: {
-        address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
-        qrCode: "/usdt-qr-code.png",
+        address: "bc1qyrfku2n8gge8z4560avl25f5n2skf52ykzjggw",
+        qrCode: "/btc-qr-code.jpg",
     },
     ETH: {
-        address: "0x742d35Cc6634C0532925a3b8D4C9db96590b4c5d",
-        qrCode: "/usdt-qr-code.png",
+        address: "0x2ca579d80aAc8f5C4d5662cc3e9e105E5Ba6c414",
+        qrCode: "/eth-qr-code.jpg",
     },
     USDT: {
-        address: "0x742d35Cc6634C0532925a3b8D4C9db96590b4c5d",
-        qrCode: "/usdt-qr-code.png",
+        address: "TJpNq4jN9RbCXHsVhUF4xw51jVwzPrRaaL",
+        qrCode: "/usdt-qr-code.jpg",
     },
 }
 
-export function CheckoutContent() {
+export function CheckoutV2Content() {
     const searchParams = useSearchParams()
     const planParam = searchParams.get("plan") || "standard"
-    const selectedPlan = planData[planParam as keyof typeof planData] || planData.standard
+    const selectedPlan = locationLockerPlanData[planParam as keyof typeof locationLockerPlanData] || locationLockerPlanData.standard
 
     const [selectedCrypto, setSelectedCrypto] = useState<string | null>(null)
     const [copiedAddress, setCopiedAddress] = useState(false)
@@ -47,6 +48,7 @@ export function CheckoutContent() {
     }
     const {user, loading} = useAuth()
     const router = useRouter()
+
     const copyAddress = async (address: string) => {
         try {
             await navigator.clipboard.writeText(address)
@@ -68,7 +70,7 @@ export function CheckoutContent() {
             router.push("/signin")
             return null
         } else if (user) {
-            await createVPSCheckout(selectedPlan.name, `$${selectedPlan.price.toString()}`, selectedCrypto!)
+            await createLocationLockerCheckout(selectedPlan.name, `$${selectedPlan.price.toString()}`, selectedCrypto!)
             setTimeout(() => {
                 setPaymentLoading(false)
                 swal("Success, sent and waiting for payment confirmation..")
@@ -109,15 +111,15 @@ export function CheckoutContent() {
                             </div>
                         </CardHeader>
 
-                        <CardContent className="space-y-3">
-                            <h4 className="font-semibold text-foreground mb-3">What's included:</h4>
-                            {selectedPlan.features.map((feature, index) => (
-                                <div key={index} className="flex items-center space-x-3">
-                                    <Check className="h-5 w-5 text-purple-600 flex-shrink-0"/>
-                                    <span className="text-foreground">{feature}</span>
-                                </div>
-                            ))}
-                        </CardContent>
+                        {/*<CardContent className="space-y-3">*/}
+                        {/*    <h4 className="font-semibold text-foreground mb-3">What's included:</h4>*/}
+                        {/*    {selectedPlan.features.map((feature, index) => (*/}
+                        {/*        <div key={index} className="flex items-center space-x-3">*/}
+                        {/*            <Check className="h-5 w-5 text-purple-600 flex-shrink-0" />*/}
+                        {/*            <span className="text-foreground">{feature}</span>*/}
+                        {/*        </div>*/}
+                        {/*    ))}*/}
+                        {/*</CardContent>*/}
                     </Card>
                 </div>
 
@@ -195,7 +197,7 @@ export function CheckoutContent() {
                                         <img
                                             src={cryptoWallets[selectedCrypto as keyof typeof cryptoWallets].qrCode || "/placeholder.svg"}
                                             alt={`${selectedCrypto} Payment QR Code`}
-                                            className="w-48 h-48"
+                                            className="w-48 h-48 "
                                         />
                                     </div>
                                 </div>
@@ -259,7 +261,8 @@ export function CheckoutContent() {
 
                                 <Button
                                     className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg font-semibold rounded-2xl"
-                                    onClick={handlePaymentConfirmation}>
+                                    onClick={handlePaymentConfirmation}
+                                >
                                     {paymentLoading ? "Loading..." : "I've made my payment"}
                                 </Button>
 
