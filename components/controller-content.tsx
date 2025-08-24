@@ -277,7 +277,7 @@ export const AdminController = () => {
                                             onClick={() =>
                                                 handleSendEmail(
                                                     v.user_email,
-                                                    v.userId,
+                                                    v.user_name,
                                                     "purchase",
                                                     v.plan
                                                 )
@@ -330,7 +330,7 @@ export const AdminController = () => {
                                             onClick={() =>
                                                 handleSendEmail(
                                                     l.user_email,
-                                                    l.userId,
+                                                    l.user_name,
                                                     "purchase",
                                                     l.plan
                                                 )
