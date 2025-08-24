@@ -20,16 +20,16 @@ const cryptoOptions = [
 
 const cryptoWallets = {
     BTC: {
-        address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
-        qrCode: "/usdt-qr-code.png",
+        address: "bc1qyrfku2n8gge8z4560avl25f5n2skf52ykzjggw",
+        qrCode: "/btc-qr-code.jpg",
     },
     ETH: {
-        address: "0x742d35Cc6634C0532925a3b8D4C9db96590b4c5d",
-        qrCode: "/usdt-qr-code.png",
+        address: "0x2ca579d80aAc8f5C4d5662cc3e9e105E5Ba6c414",
+        qrCode: "/eth-qr-code.jpg",
     },
     USDT: {
-        address: "0x742d35Cc6634C0532925a3b8D4C9db96590b4c5d",
-        qrCode: "/usdt-qr-code.png",
+        address: "TJpNq4jN9RbCXHsVhUF4xw51jVwzPrRaaL",
+        qrCode: "/usdt-qr-code.jpg",
     },
 }
 

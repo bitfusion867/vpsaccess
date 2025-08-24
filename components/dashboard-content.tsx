@@ -15,6 +15,7 @@ import {
     Activity,
     TrendingUp,
     Lock,
+    Home,
     LogOut, CheckCircle,
 } from "lucide-react"
 import {useAuth} from "@/contexts/auth-context"
@@ -136,15 +137,18 @@ export function DashboardContent() {
                             Active
                         </Badge>
 
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={handleLogout}
-                            className="rounded-xl bg-transparent text-xs sm:text-sm px-3 py-1"
-                        >
-                            <LogOut className="h-4 w-4 mr-1" />
-                            Logout
-                        </Button>
+
+
+                        <Link href="/">
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="rounded-xl bg-transparent text-xs sm:text-sm px-3 py-1"
+                            >
+                                <Home className="h-4 w-4 mr-1" />
+                                Home
+                            </Button>
+                        </Link>
 
                         <Link href="/location-locker">
                             <Button
@@ -156,6 +160,16 @@ export function DashboardContent() {
                                 Location Locker
                             </Button>
                         </Link>
+
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleLogout}
+                            className="rounded-xl bg-transparent text-xs sm:text-sm px-3 py-1"
+                        >
+                            <LogOut className="h-4 w-4 mr-1" />
+                            Logout
+                        </Button>
                     </div>
                 </div>
 
